@@ -3,8 +3,6 @@
 
 > Inspired by [arvindsv/faketime](https://github.com/arvindsv/faketime).
 
-[![Build Status](https://travis-ci.org/faketime-java/faketime.svg?branch=master)](https://travis-ci.org/faketime-java/faketime)
-
 ```java
 public class ExamRegistrationServiceTest implements FakeTimeMixin {
   
@@ -38,56 +36,84 @@ public class ExamRegistrationServiceTest implements FakeTimeMixin {
 
 ## Manual setup
 Start faking time in 4 easy steps:
-1. Download the `faketime-agent.jar` for your operating system from the [Maven Central](https://mvnrepository.com/artifact/io.github.nethiberna/faketime-agent) repository.
+1. Download the `faketime-agent.jar` for your operating system from the [Maven Central](https://repo1.maven.org/maven2/io/github/nethibernate/faketime-agent/1.6/) repository.
 ```xml
 <!-- Windows 32bit -->
 <dependency>
-  <groupId>io.github.nethiberna</groupId>
-  <artifactId>faketime-agent</artifactId>
-  <version>0.8.0</version>
-  <classifier>windows32</classifier>
+    <groupId>io.github.nethibernate</groupId>   
+    <artifactId>faketime-agent</artifactId>
+    <version>1.6</version>
+    <classifier>windows_x86_32</classifier>
 </dependency>
 
 <!-- Windows 64bit -->
 <dependency>
-  <groupId>io.github.nethiberna</groupId>
-  <artifactId>faketime-agent</artifactId>
-  <version>0.8.0</version>
-  <classifier>windows64</classifier>
+    <groupId>io.github.nethibernate</groupId>
+    <artifactId>faketime-agent</artifactId>
+    <version>1.6</version>
+    <classifier>windows_x86_64</classifier>
 </dependency>
 
 <!-- macOS 32bit -->
 <dependency>
-  <groupId>io.github.nethiberna</groupId>
-  <artifactId>faketime-agent</artifactId>
-  <version>0.8.0</version>
-  <classifier>mac32</classifier>
+    <groupId>io.github.nethibernate</groupId>
+    <artifactId>faketime-agent</artifactId>
+    <version>1.6</version>
+    <classifier>osx_x86_32</classifier>
 </dependency>
 
 <!-- macOS 64bit -->
 <dependency>
-  <groupId>io.github.nethiberna</groupId>
-  <artifactId>faketime-agent</artifactId>
-  <version>0.8.0</version>
-  <classifier>mac64</classifier>
+    <groupId>io.github.nethibernate</groupId>
+    <artifactId>faketime-agent</artifactId>
+    <version>1.6</version>
+    <classifier>osx_x86_64</classifier>
 </dependency>
 
 <!-- Linux 32bit -->
 <dependency>
-  <groupId>io.github.nethiberna</groupId>
-  <artifactId>faketime-agent</artifactId>
-  <version>0.8.0</version>
-  <classifier>linux32</classifier>
+    <groupId>io.github.nethibernate</groupId>
+    <artifactId>faketime-agent</artifactId>
+    <version>1.6</version>
+    <classifier>linux_x86_32</classifier>
 </dependency>
 
 <!-- Linux 64bit -->
 <dependency>
-  <groupId>io.github.nethiberna</groupId>
-  <artifactId>faketime-agent</artifactId>
-  <version>0.8.0</version>
-  <classifier>linux64</classifier>
+    <groupId>io.github.nethibernate</groupId>
+    <artifactId>faketime-agent</artifactId>
+    <version>1.6</version>
+    <classifier>linux_x86_64</classifier>
+</dependency>
+
+<!-- Linux Arm 64bit -->
+<dependency>
+    <groupId>io.github.nethibernate</groupId>
+    <artifactId>faketime-agent</artifactId>
+    <version>1.6</version>
+    <classifier>linux_aarch_64</classifier>
 </dependency>
 ```
+or we recommand you to use os-maven-plugin to help identify classifier:
+```xml
+<dependency>
+    <groupId>io.github.nethibernate</groupId>
+    <artifactId>faketime-agent</artifactId>
+    <version>1.6</version>
+    <classifier>${os.detected.classifier}</classifier>
+</dependency>
+...
+<build>
+<extensions>
+    <extension>
+        <groupId>kr.motd.maven</groupId>
+        <artifactId>os-maven-plugin</artifactId>
+        <version>1.7.0</version>
+    </extension>
+</extensions>
+</build>
+```
+
 2. Unpack the `jar` to get the agent, which is `faketime.dll` on Windows and `libfaketime` on other systems.
 3. Attach the agent to your Java program with following JVM arguments.
 ```bash
@@ -110,9 +136,9 @@ System.out.println(System.currentTimeMillis()); // 12345
 ## Java 8 API
 ```xml
 <dependency>
-  <groupId>io.github.nethiberna</groupId>
+  <groupId>io.github.nethibernate</groupId>
   <artifactId>faketime-api</artifactId>
-  <version>0.8.0</version>
+  <version>1.6</version>
   <scope>test</scope>
 </dependency>
 ```
@@ -147,7 +173,7 @@ public class MyTest implements FakeTimeMixin {
 <dependency>
   <groupId>io.github.nethibernate</groupId>
   <artifactId>faketime-junit</artifactId>
-  <version>0.8.0</version>
+  <version>1.6</version>
   <scope>test</scope>
 </dependency>
 ```
@@ -190,11 +216,20 @@ It then sets a property that you can use in `surefire` or `failsafe` plugins to 
     <plugin>
       <groupId>io.github.nethibernate</groupId>
       <artifactId>faketime-maven-plugin</artifactId>
-      <version>0.8.0</version>
+      <version>1.6</version>
+      <configuration>
+        <targetDir>${basedir}/somedir</targetDir>
+        <fileMappers>
+          <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+            <pattern>*</pattern>
+            <replacement>some_exmaple</replacement>
+          </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+        </fileMappers>
+      </configuration>
       <executions>
         <execution>
           <goals>
-            <goal>prepare</goal>
+            <goal>get-agent</goal>
           </goals>
         </execution>
       </executions>
@@ -236,7 +271,7 @@ _Note: before running tests from IntelliJ make sure `faketime-maven-plugin` has 
       <version>2.22.1</version>
       <configuration>
         <argLine>
-          -agentpath:${project.build.directory}/${faketime.binary}
+          -agentpath:${basedir}/lib/${faketime.binary}
           -XX:+UnlockDiagnosticVMOptions
           -XX:DisableIntrinsic=_currentTimeMillis
           -XX:CompileCommand=quiet
@@ -245,16 +280,19 @@ _Note: before running tests from IntelliJ make sure `faketime-maven-plugin` has 
         </argLine>
       </configuration>
     </plugin>
-    
+
     <plugin>
       <groupId>io.github.nethibernate</groupId>
       <artifactId>faketime-maven-plugin</artifactId>
-      <version>0.8.0</version>
+      <version>1.6</version>
+      <configuration>
+        <targetDir>${basedir}/lib</targetDir>
+      </configuration>
       <executions>
         <execution>
-          <goals>
-            <goal>prepare</goal>
-          </goals>
+            <goals>
+                <goal>get-agent</goal>
+            </goals>
         </execution>
       </executions>
     </plugin>
