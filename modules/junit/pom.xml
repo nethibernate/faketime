@@ -7,20 +7,20 @@
   <name>FakeTime JUnit API</name>
   <artifactId>faketime-junit</artifactId>
   <packaging>jar</packaging>
-  <version>0-SNAPSHOT</version>
+  <version>1.2</version>
 
   <parent>
-    <groupId>io.github.faketime-java</groupId>
+    <groupId>io.github.nethibernate</groupId>
     <artifactId>faketime-parent</artifactId>
-    <version>0-SNAPSHOT</version>
+    <version>1.2</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
   <dependencies>
     <dependency>
-      <groupId>io.github.faketime-java</groupId>
+      <groupId>io.github.nethibernate</groupId>
       <artifactId>faketime-api</artifactId>
-      <version>0-SNAPSHOT</version>
+      <version>1.2</version>
       <scope>compile</scope>
     </dependency>
 

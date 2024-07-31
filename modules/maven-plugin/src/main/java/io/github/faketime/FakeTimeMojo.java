@@ -33,7 +33,7 @@ import org.codehaus.plexus.components.io.fileselectors.IncludeExcludeFileSelecto
 @Mojo(name="prepare", defaultPhase = VALIDATE)
 public class FakeTimeMojo extends AbstractMojo {
 
-  private static final String GROUP_ID = "io.github.faketime-java";
+  private static final String GROUP_ID = "io.github.nethibernate";
   private static final String ARTIFACT_ID = "faketime-maven-plugin";
   private static final String AGENT_ARTIFACT_ID = "faketime-agent";
 
@@ -44,6 +44,12 @@ public class FakeTimeMojo extends AbstractMojo {
 
   @Component
   private ArchiverManager archiverManager;
+
+  @Parameter(
+          required = true,
+          defaultValue = "${basedir}/target"
+  )
+  private File targetDir;
 
   @Parameter(defaultValue = "${session}", readonly = true)
   private MavenSession session;
@@ -90,7 +96,7 @@ public class FakeTimeMojo extends AbstractMojo {
   }
 
   private File getTargetDirectory() {
-    return new File(session.getCurrentProject().getBuild().getDirectory());
+    return targetDir == null ? new File(session.getCurrentProject().getBuild().getDirectory()) : targetDir;
   }
 
   private FileSelector[] getAgentBinaryFileSelector() {

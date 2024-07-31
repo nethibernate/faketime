@@ -38,11 +38,11 @@ public class ExamRegistrationServiceTest implements FakeTimeMixin {
 
 ## Manual setup
 Start faking time in 4 easy steps:
-1. Download the `faketime-agent.jar` for your operating system from the [Maven Central](https://mvnrepository.com/artifact/io.github.faketime-java/faketime-agent) repository.
+1. Download the `faketime-agent.jar` for your operating system from the [Maven Central](https://mvnrepository.com/artifact/io.github.nethiberna/faketime-agent) repository.
 ```xml
 <!-- Windows 32bit -->
 <dependency>
-  <groupId>io.github.faketime-java</groupId>
+  <groupId>io.github.nethiberna</groupId>
   <artifactId>faketime-agent</artifactId>
   <version>0.8.0</version>
   <classifier>windows32</classifier>
@@ -50,7 +50,7 @@ Start faking time in 4 easy steps:
 
 <!-- Windows 64bit -->
 <dependency>
-  <groupId>io.github.faketime-java</groupId>
+  <groupId>io.github.nethiberna</groupId>
   <artifactId>faketime-agent</artifactId>
   <version>0.8.0</version>
   <classifier>windows64</classifier>
@@ -58,7 +58,7 @@ Start faking time in 4 easy steps:
 
 <!-- macOS 32bit -->
 <dependency>
-  <groupId>io.github.faketime-java</groupId>
+  <groupId>io.github.nethiberna</groupId>
   <artifactId>faketime-agent</artifactId>
   <version>0.8.0</version>
   <classifier>mac32</classifier>
@@ -66,7 +66,7 @@ Start faking time in 4 easy steps:
 
 <!-- macOS 64bit -->
 <dependency>
-  <groupId>io.github.faketime-java</groupId>
+  <groupId>io.github.nethiberna</groupId>
   <artifactId>faketime-agent</artifactId>
   <version>0.8.0</version>
   <classifier>mac64</classifier>
@@ -74,7 +74,7 @@ Start faking time in 4 easy steps:
 
 <!-- Linux 32bit -->
 <dependency>
-  <groupId>io.github.faketime-java</groupId>
+  <groupId>io.github.nethiberna</groupId>
   <artifactId>faketime-agent</artifactId>
   <version>0.8.0</version>
   <classifier>linux32</classifier>
@@ -82,7 +82,7 @@ Start faking time in 4 easy steps:
 
 <!-- Linux 64bit -->
 <dependency>
-  <groupId>io.github.faketime-java</groupId>
+  <groupId>io.github.nethiberna</groupId>
   <artifactId>faketime-agent</artifactId>
   <version>0.8.0</version>
   <classifier>linux64</classifier>
@@ -110,7 +110,7 @@ System.out.println(System.currentTimeMillis()); // 12345
 ## Java 8 API
 ```xml
 <dependency>
-  <groupId>io.github.faketime-java</groupId>
+  <groupId>io.github.nethiberna</groupId>
   <artifactId>faketime-api</artifactId>
   <version>0.8.0</version>
   <scope>test</scope>
@@ -145,7 +145,7 @@ public class MyTest implements FakeTimeMixin {
 ## JUnit rule
 ```xml
 <dependency>
-  <groupId>io.github.faketime-java</groupId>
+  <groupId>io.github.nethibernate</groupId>
   <artifactId>faketime-junit</artifactId>
   <version>0.8.0</version>
   <scope>test</scope>
@@ -174,7 +174,7 @@ public class MyTest implements FakeTimeMixin {
 For further convenience there is a Maven plugin that downloads and unpacks the correct agent for your operating system.
 It then sets a property that you can use in `surefire` or `failsafe` plugins to attach the agent.
 
-> Full example [here](https://github.com/faketime-java/faketime/blob/master/e2e-tests/pom.xml)
+> Full example [here](https://github.com/nethibernate/faketime/blob/master/e2e-tests/pom.xml)
 ```xml
 <build>
   <plugins>
@@ -188,7 +188,7 @@ It then sets a property that you can use in `surefire` or `failsafe` plugins to 
     </plugin>
     
     <plugin>
-      <groupId>io.github.faketime-java</groupId>
+      <groupId>io.github.nethibernate</groupId>
       <artifactId>faketime-maven-plugin</artifactId>
       <version>0.8.0</version>
       <executions>
@@ -208,7 +208,7 @@ The only thing you need to do is to replace `${faketime.argLine}` with literal a
 
 _Note: before running tests from IntelliJ make sure `faketime-maven-plugin` has downloaded the agent, otherwise tests won't start_
 
-> Full example [here](https://github.com/faketime-java/faketime/blob/master/e2e-tests/pom.xml)
+> Full example [here](https://github.com/nethibernate/faketime/blob/master/e2e-tests/pom.xml)
 ```xml
 <properties>
   <faketime.binary>libfaketime</faketime.binary>
@@ -247,7 +247,7 @@ _Note: before running tests from IntelliJ make sure `faketime-maven-plugin` has 
     </plugin>
     
     <plugin>
-      <groupId>io.github.faketime-java</groupId>
+      <groupId>io.github.nethibernate</groupId>
       <artifactId>faketime-maven-plugin</artifactId>
       <version>0.8.0</version>
       <executions>

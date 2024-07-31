@@ -7,12 +7,12 @@
   <name>FakeTime Native Agent</name>
   <artifactId>faketime-agent</artifactId>
   <packaging>jar</packaging>
-  <version>0-SNAPSHOT</version>
+  <version>1.2</version>
 
   <parent>
-    <groupId>io.github.faketime-java</groupId>
+    <groupId>io.github.nethibernate</groupId>
     <artifactId>faketime-parent</artifactId>
-    <version>0-SNAPSHOT</version>
+    <version>1.2</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
@@ -70,9 +70,9 @@
     <profile>
       <id>windows</id>
       <activation>
-        <os>
-          <family>windows</family>
-        </os>
+<!--        <os>-->
+<!--          <family>windows</family>-->
+<!--        </os>-->
       </activation>
       <properties>
         <compile.script>compile_win32.bat</compile.script>
@@ -94,7 +94,7 @@
               <goal>jar</goal>
             </goals>
             <configuration>
-              <classifier>mac32</classifier>
+              <classifier>osx_x86_32</classifier>
               <classesDirectory>${project.build.outputDirectory}/darwin_x86_32</classesDirectory>
             </configuration>
           </execution>
@@ -105,7 +105,7 @@
               <goal>jar</goal>
             </goals>
             <configuration>
-              <classifier>mac64</classifier>
+              <classifier>osx_x86_64</classifier>
               <classesDirectory>${project.build.outputDirectory}/darwin_x86_64</classesDirectory>
             </configuration>
           </execution>
@@ -116,7 +116,7 @@
               <goal>jar</goal>
             </goals>
             <configuration>
-              <classifier>linux32</classifier>
+              <classifier>linux_x86_32</classifier>
               <classesDirectory>${project.build.outputDirectory}/linux_x86_32</classesDirectory>
             </configuration>
           </execution>
@@ -127,8 +127,19 @@
               <goal>jar</goal>
             </goals>
             <configuration>
-              <classifier>linux64</classifier>
+              <classifier>linux_x86_64</classifier>
               <classesDirectory>${project.build.outputDirectory}/linux_x86_64</classesDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>linux_aarch_64</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <classifier>linux_aarch_64</classifier>
+              <classesDirectory>${project.build.outputDirectory}/linux_aarch_64</classesDirectory>
             </configuration>
           </execution>
           <execution>
@@ -138,7 +149,7 @@
               <goal>jar</goal>
             </goals>
             <configuration>
-              <classifier>windows32</classifier>
+              <classifier>windows_x86_32</classifier>
               <classesDirectory>${project.build.outputDirectory}/win32_x86_32</classesDirectory>
             </configuration>
           </execution>
@@ -149,7 +160,7 @@
               <goal>jar</goal>
             </goals>
             <configuration>
-              <classifier>windows64</classifier>
+              <classifier>windows_x86_64</classifier>
               <classesDirectory>${project.build.outputDirectory}/win32_x86_64</classesDirectory>
             </configuration>
           </execution>
