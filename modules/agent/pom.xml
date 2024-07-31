@@ -7,12 +7,12 @@
   <name>FakeTime Native Agent</name>
   <artifactId>faketime-agent</artifactId>
   <packaging>jar</packaging>
-  <version>1.2</version>
+  <version>1.6</version>
 
   <parent>
     <groupId>io.github.nethibernate</groupId>
     <artifactId>faketime-parent</artifactId>
-    <version>1.2</version>
+    <version>1.6</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 

@@ -24,13 +24,14 @@ import org.apache.maven.shared.transfer.artifact.resolve.ArtifactResolverExcepti
 import org.codehaus.plexus.archiver.UnArchiver;
 import org.codehaus.plexus.archiver.manager.ArchiverManager;
 import org.codehaus.plexus.archiver.manager.NoSuchArchiverException;
+import org.codehaus.plexus.components.io.filemappers.FileMapper;
 import org.codehaus.plexus.components.io.fileselectors.FileSelector;
 import org.codehaus.plexus.components.io.fileselectors.IncludeExcludeFileSelector;
 
 /**
  * @threadSafe
  */
-@Mojo(name="prepare", defaultPhase = VALIDATE)
+@Mojo(name="get-agent", defaultPhase = VALIDATE)
 public class FakeTimeMojo extends AbstractMojo {
 
   private static final String GROUP_ID = "io.github.nethibernate";
@@ -51,12 +52,15 @@ public class FakeTimeMojo extends AbstractMojo {
   )
   private File targetDir;
 
+  @Parameter
+  private FileMapper[] fileMappers;
+
   @Parameter(defaultValue = "${session}", readonly = true)
   private MavenSession session;
 
   @Override
   public void execute() throws MojoFailureException {
-    if (getOs() == null || Os.getBitness() == null) {
+    if (getOs() == null || Os.getArch() == null) {
       getLog().warn(String.format("!!! %s %s is not supported by FakeTime !!!", OS_NAME, OS_ARCH));
       return;
     }
@@ -73,6 +77,7 @@ public class FakeTimeMojo extends AbstractMojo {
 
       UnArchiver unArchiver = archiverManager.getUnArchiver(artifact.getType());
       unArchiver.setSourceFile(artifact.getFile());
+      if(fileMappers != null && fileMappers.length > 0) unArchiver.setFileMappers(fileMappers);
       unArchiver.setDestDirectory(getTargetDirectory());
       unArchiver.setFileSelectors(getAgentBinaryFileSelector());
       unArchiver.extract();
@@ -91,7 +96,7 @@ public class FakeTimeMojo extends AbstractMojo {
     coordinate.setGroupId(GROUP_ID);
     coordinate.setArtifactId(AGENT_ARTIFACT_ID);
     coordinate.setVersion(getPluginVersion());
-    coordinate.setClassifier(getOs().getClassifierName() + Os.getBitness());
+    coordinate.setClassifier(getOs().getClassifierName() + "_" + Os.getArch());
     return coordinate;
   }
 

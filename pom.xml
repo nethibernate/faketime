@@ -8,7 +8,7 @@
   <groupId>io.github.nethibernate</groupId>
   <artifactId>faketime-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.2</version>
+  <version>1.6</version>
 
   <description>
     FakeTime uses a native Java agent to replace System.currentTimeMillis() implementation with the one you can control using system properties

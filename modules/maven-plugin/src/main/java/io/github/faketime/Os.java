@@ -11,7 +11,7 @@ public enum Os {
 
   WINDOWS("windows", "windows", "faketime.dll"),
   LINUX("linux", "linux", "libfaketime"),
-  MAC(asList("mac", "osx"), "mac", "libfaketime");
+  MAC(asList("mac", "osx"), "osx", "libfaketime");
 
   private final List<String> names;
   private final String classifierName;
@@ -44,6 +44,30 @@ public enum Os {
       case "ia32":
       case "x32":
         return "32";
+      default:
+        return null;
+    }
+  }
+
+  public static String getArch() {
+    switch (OS_ARCH.replace("_", "")) {
+      case "x8664":
+      case "amd64":
+      case "ia32e":
+      case "em64t":
+      case "x64":
+        return "x86_64";
+      case "x8632":
+      case "x86":
+      case "i386":
+      case "i486":
+      case "i586":
+      case "i686":
+      case "ia32":
+      case "x32":
+        return "x86_32";
+      case "aarch64":
+        return "aarch_64";
       default:
         return null;
     }
